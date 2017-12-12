@@ -1,0 +1,84 @@
+import os
+import datetime
+import time
+from tkinter import *
+y=70
+stop=0
+def second():
+    global sectk
+    global sc
+    sectk=Tk()
+    sectk.title("Секундомер")
+    sc=Canvas(sectk,width=400,height=400)
+    st=Button(sectk,text="Старт",width=30,height=4,bg="#00FF00",fg="#0000ff",font="Arial 20 bold",command=start)
+    st2=Button(sectk,text="Стоп",width=30,height=4,bg="#00FF00",fg="#0000ff",font="Arial 20 bold",command=stop)
+    kt=Button(sectk,text="Круг",width=30,height=4,bg="#00FF00",fg="#0000ff",font="Arial 20 bold",command=krug)
+    sc.pack()
+    st.pack()
+    st2.pack()
+    kt.pack()
+def start():
+    global a
+    try:
+        h=0
+        m=0
+        s=0
+        while True:
+            a=str(h)+":"+str(m)+":"+str(s)
+            t=sc.create_text(200,100,text=a,fill="#0000ff",font="Arial 20 bold")
+            sectk.update()
+            s+=1
+            if s==60:
+                s=0
+                m+=1
+            if m==60:
+                m=0
+                h+=1
+            if stop==1:
+                break
+            time.sleep(1)
+            sc.delete(t)
+    except:
+        pass
+def krug():
+    global y
+    k=sc.create_text(300,y,text=a,fill="red",font="Arial 20 bold")
+    y+=25
+def stop():
+    global stop
+    stop=1
+def calc():
+    os.startfile("C:\windows\system32\calc.exe")
+def date():
+    try:
+        tkdate=Tk()
+        tkdate.title("Дата и время")
+        dc=Canvas(tkdate,width=300,height=200,bg="#00FF00")
+        dc.pack()
+        while True:
+            now=time.strftime("%m:%d:%Y\n  %H:%M:%S")
+            d=dc.create_text(150,100,text=now,fill="#00bfff",font="Arial 20 bold")
+            tkdate.update()
+            dc.delete(d)
+    except:
+        pass
+def ngtime():
+    try:
+        ngtk=Tk()
+        ngtk.title("Время до нового года")
+        nc=Canvas(ngtk,width=800,height=200,bg="#00FF00")
+        nc.pack()
+        while True:
+            delta=str(datetime.datetime(2018,1,1,00,00,00)-datetime.datetime.now())
+            f=delta.find(".")
+            delta=delta[0:f]
+            f=delta.find(":")
+            delta=delta[:f]+" hours, "+delta[f+1:]
+            f=delta.find(":")
+            delta=delta[:f]+" minutes, "+delta[f+1:]
+            delta=delta+" seconds."
+            n=nc.create_text(400,100,text=delta,fill="red",font="Arial 20 bold")
+            ngtk.update()
+            nc.delete(n)
+    except:
+        pass

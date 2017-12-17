@@ -125,14 +125,41 @@ def ngtime():
 def time1():
     chooze=Tk()
     chooze.title("Выбор города")
-    moscow=Button(chooze,text="Москва",command=clock.moscow)
-    london=Button(chooze,text="Лондон",command=clock.london)
-    tokyo=Button(chooze,text="Токио",command=clock.tokyo)
-    new_york=Button(chooze,text="Нью-йорк",command=clock.new_york)
-    paris=Button(chooze,text="Париж",command=clock.paris)
+    moscow=Button(chooze,text="Москва",width=15,height=2,bg="#00FF00",fg="#0000ff",font="Arial 20 bold",command=clock.moscow)
+    london=Button(chooze,text="Лондон",width=15,height=2,bg="#00FF00",fg="#0000ff",font="Arial 20 bold",command=clock.london)
+    tokyo=Button(chooze,text="Токио",width=15,height=2,bg="#00FF00",fg="#0000ff",font="Arial 20 bold",command=clock.tokyo)
+    new_york=Button(chooze,text="Нью-йорк",width=15,height=2,bg="#00FF00",fg="#0000ff",font="Arial 20 bold",command=clock.new_york)
+    paris=Button(chooze,text="Париж",width=15,height=2,bg="#00FF00",fg="#0000ff",font="Arial 20 bold",command=clock.paris)
     moscow.pack()
     london.pack()
     tokyo.pack()
     new_york.pack()
     paris.pack()
-
+def opr():
+    m=int(time.strftime("%m"))
+    d=int(time.strftime("%d"))
+    opr=Tk()
+    opr.title("Ближайшие праздники")
+    oprc=Canvas(opr,height=400,width=1000,bg="#007faa")
+    oprc.pack()
+    if m==9 and d>=2 or 10<=m<=12:
+        hol="Новый Год"
+    elif m==1 and 1<=d<=6:
+        hol="Рождество (7 января)"
+    elif m==1 and 7<=d<=10:
+        hol="День рождения Игоря (11 января)"
+    elif m==1 and 11<=d<=26:
+        hol="День рождения Макса (27 января)"
+    elif m==1 and d>=27 or m==2 and 1<=d<=13:
+       hol="День святого Валентина (14 февраля)"
+    elif m==2 and 14<=d<=22:
+        hol="День защитника Oтечества (23 февраля)"
+    elif m==2 and d>=23 or m==3 and 1<=d<=7:
+        hol="Международный женский день (8 марта) "
+    elif m==3 and d>=8 or m==4 or m==5 and 1<=d<=8:
+        hol="День победы (9 мая)"
+    elif m==5 and d>=9 or 6<=m<=8:
+        hol="траурный день (1 сентября)"
+    elif m==9 and d==1:
+        hol="День рождения Саши (2 сентября)"
+    oprc.create_text(500,200,text="Ближайший праздник: "+hol,fill="yellow",font="Arial 25 bold")
